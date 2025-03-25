@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>코엑스 지도</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
+  <style>
+    html, body { margin: 0; padding: 0; height: 100%; font-family: sans-serif; }
+    #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+
+    #infoBox {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      transform: none;
+      background: #fff;
+      padding: 12px 16px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      z-index: 1000;
+      min-width: 260px;
+      text-align: left;
+    }
+
+    #modeBox {
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+    #modeBox label {
+      margin-right: 10px;
+    }
+
+    @media (max-width: 768px) {
+      #infoBox {
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        min-width: auto;
+        font-size: 14px;
+        padding: 10px;
+      }
+      #modeBox {
+        font-size: 13px;
+      }
+      #modeBox label {
+        display: inline-block;
+        margin-bottom: 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div id="infoBox">
+  <div id="modeBox">
+    <label><input type="radio" name="mode" value="walking" checked> 도보</label>
+    <label><input type="radio" name="mode" value="cycling"> 자전거</label>
+    <label><input type="radio" name="mode" value="driving"> 차량</label>
+  </div>
+  <p id="modeLabel">🛴 이동 수단: 도보</p>
+  <p>🚩 출발지: 없음</p>
+  <p>🏁 도착지: 없음</p>
+  <p>⏱ 예상 소요 시간: -</p>
+</div>
+<div id="map"></div>
+<script>
+  mapboxgl.accessToken = 'pk.eyJ1Ijoic2hhd252YW5kZXJiaWx0IiwiYSI6ImNtOGtoa2txNjB6MmkycW9uNTQwZHJsd2EifQ.4zB2BZofOU9UUT6cQOKgsQ';
+  const map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v12',
+    center: [127.061, 37.511],
+    zoom: 16
+  });
+
+  document.querySelectorAll('input[name="mode"]').forEach(input => {
+    input.addEventListener('change', () => {
+      document.getElementById('modeLabel').innerText = `🛴 이동 수단: ${input.labels[0].innerText}`;
+    });
+  });
+</script>
+</body>
+</html>
