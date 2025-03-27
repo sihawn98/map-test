@@ -6,19 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="style.css" rel="stylesheet" />
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
 </head>
 <body>
-<div id="container">
-  <div id="sidebar">
-    <h2>🚶 경로 정보</h2>
-    <div class="info-label" id="startLabel">출발지: -</div>
-    <div class="info-label" id="endLabel">도착지: -</div>
-    <div class="info-label" id="durationLabel">예상 시간: -</div>
+  <div id="sidebar" class="hidden">
+    <h3>🚩 출발지: <span id="startName">-</span></h3>
+    <h3>📍 경유지: <span id="waypoints">없음</span></h3>
+    <h3>🏁 도착지: <span id="endName">-</span></h3>
+    <h3>⏱ 예상 시간: <span id="duration">-</span></h3>
+    <button onclick="closeSidebar()">닫기</button>
   </div>
   <div id="map"></div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
